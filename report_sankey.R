@@ -7,6 +7,11 @@ library(RColorBrewer)
 library(htmlwidgets)
 library(webshot)
 
+conf_agg <- function(x) {
+  c("Low", "Medium", "High")[round(ceiling(x))]
+}
+
+
 # Load df saved after 00_preprocess.R script
 unique(data$Sector)
 unique(data$Pressure)
@@ -19,12 +24,12 @@ data <- data |> filter(ImpactRisk > 0.001)
 
 links <-
   data |>
-  transmute(source = Sector, target = Pressure, value = ImpactRisk, linkgroup = Pressure) |>
+  transmute(source = Sector, target = Pressure, value = ImpactRisk, linkgroup = Pressure, Confidence = Confidence) |>
   rbind(
-    data |> transmute(source = Pressure, target = Ecological.Characteristic, value = ImpactRisk, linkgroup = Pressure)
+    data |> transmute(source = Pressure, target = Ecological.Characteristic, value = ImpactRisk, linkgroup = Pressure, Confidence = Confidence)
   ) |>
   group_by(source, target, linkgroup) |>
-  summarise(value = sum(value) * 10) |>
+  summarise(value = sum(value) * 10, Confidence = conf_agg(Confidence)) |>
   arrange(value)
 
 summary(links$value)
@@ -84,8 +89,87 @@ p <- sankeyNetwork(
 )
 p
 
+col_scale <- 'd3.scaleOrdinal()
+  .domain(["Low","Medium","High"])
+  .range(["rgba(0,90,181,0.25)","rgba(0,90,181,0.6)","rgba(0,90,181,1.0)"])'
+
+links[
+  links$source == "Small vessels - active demersal",
+  "Confidence"] <- "Low"
+
+links[
+  links$source == "Small vessels - active demersal" & links$target == "Living Resources Extraction",
+  "Confidence"] <- "Medium"
+
+
+p2 <- sankeyNetwork(
+  Links = links, Nodes = nodes, Source = "IDsource", Target = "IDtarget",
+  Value = "value", NodeID = "name",
+  units = "Impact Risk",
+  LinkGroup = "Confidence",
+  fontSize = 12, nodeWidth = 28,
+  colourScale = col_scale
+)
+p2
+# ---- Inject legend + tooltips (rendered inside SVG) ----
+p2 <- htmlwidgets::onRender(
+  p2,
+  '
+  function(el, x) {
+    const svg = d3.select(el).select("svg");
+    const W = +svg.attr("width") || el.getBoundingClientRect().width;
+    const labels = ["Low","Medium","High"];
+    const colors = ["rgba(0,90,181,0.25)","rgba(0,90,181,0.6)","rgba(0,90,181,1.0)"];
+
+    // Legend group (top-right)
+    const pad = 10, rowH = 20, sw = 14;
+    const boxW = 150, boxH = pad*2 + 16 + labels.length*rowH;
+    const g = svg.append("g")
+      .attr("class","legend")
+      .attr("transform", `translate(${W - boxW - 10}, 10)`);
+
+    g.append("rect")
+      .attr("width", boxW).attr("height", boxH)
+      .attr("rx", 6).attr("ry", 6)
+      .style("fill", "white").style("stroke", "#ccc");
+
+    g.append("text").text("Confidence")
+      .attr("x", pad).attr("y", pad + 12)
+      .style("font-size","12px").style("font-weight","600");
+
+    const items = g.append("g").attr("transform", `translate(${pad}, ${pad+18})`)
+      .selectAll("g").data(labels).enter().append("g")
+      .attr("transform", (d,i) => `translate(0, ${i*rowH})`);
+
+    items.append("rect")
+      .attr("width", sw).attr("height", sw).attr("y", -11)
+      .style("fill", (d,i) => colors[i]).style("stroke", "none");
+
+    items.append("text")
+      .attr("x", sw + 8).attr("y", 0)
+      .style("font-size","12px").style("dominant-baseline","central")
+      .text(d => d);
+
+    // Simple title tooltips for links
+    d3.select(el).selectAll(".link")
+      .on("mouseover", function(d) {
+        const src = x.nodes[d.source.index].name;
+        const tgt = x.nodes[d.target.index].name;
+        const val = d.value;
+        const conf = d.group;
+        this.setAttribute("title", `${src} → ${tgt}\\nValue: ${val}\\nConfidence: ${conf}`);
+      });
+  }
+  '
+)
+html_file <- "sankey_confidence_with_legendNEW.html"
+
 # save the widget
 saveWidget(p, file = "sankey.html", selfcontained = TRUE)
+saveWidget(p2, file = html_file, selfcontained = TRUE)
 
 # save the widget
 webshot("sankey.html", "sankey.png", vwidth = 1200, vheight = 1200)
+
+
+
