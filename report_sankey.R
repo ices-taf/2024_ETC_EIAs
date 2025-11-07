@@ -89,24 +89,50 @@ p <- sankeyNetwork(
 )
 p
 
+# col_scale <- 'd3.scaleOrdinal()
+#   .domain(["Low","Medium","High"])
+#   .range(["rgba(0,90,181,0.25)","rgba(0,90,181,0.6)","rgba(0,90,181,1.0)"])'
+
+nodes$node_group <- "AllNodes"
+
+# 2) Extend your colourScale domain to include the node group
 col_scale <- 'd3.scaleOrdinal()
-  .domain(["Low","Medium","High"])
-  .range(["rgba(0,90,181,0.25)","rgba(0,90,181,0.6)","rgba(0,90,181,1.0)"])'
+  .domain(["AllNodes","Low","Medium","High"])
+  .range(["#6B7280","#f06a2e","#ffd60a","#8edafa"])'
+
+
+# links[
+#   links$source == "Small vessels - active demersal",
+#   "Confidence"] <- "Low"
 
 links[
-  links$source == "Small vessels - active demersal",
+  links$source == "Small vessels - active demersal" & links$target == "Abrasion",
+  "Confidence"] <- "Medium"
+links[
+  links$source == "Abrasion" & links$target == "Fish",
+  "Confidence"] <- "Medium"
+
+links[
+  links$source == "Large vessels - pelagic trawlers" & links$target == "Living Resources Extraction",
+  "Confidence"] <- "Low"
+links[
+  links$source == "Living Resources Extraction" & links$target == "Fish",
   "Confidence"] <- "Low"
 
 links[
-  links$source == "Small vessels - active demersal" & links$target == "Living Resources Extraction",
-  "Confidence"] <- "Medium"
+  links$source == "Small vessels - active demersal" & links$target == "Noise",
+  "Confidence"] <- "High"
 
+links[
+  links$source == "Noise" & links$target == "Marine Mammals",
+  "Confidence"] <- "Medium"
 
 p2 <- sankeyNetwork(
   Links = links, Nodes = nodes, Source = "IDsource", Target = "IDtarget",
   Value = "value", NodeID = "name",
   units = "Impact Risk",
   LinkGroup = "Confidence",
+  NodeGroup = "node_group",
   fontSize = 12, nodeWidth = 28,
   colourScale = col_scale
 )
@@ -168,8 +194,11 @@ html_file <- "sankey_confidence_with_legendNEW.html"
 saveWidget(p, file = "sankey.html", selfcontained = TRUE)
 saveWidget(p2, file = html_file, selfcontained = TRUE)
 
+
+
+
 # save the widget
 webshot("sankey.html", "sankey.png", vwidth = 1200, vheight = 1200)
-
+webshot(html_file, "sankey_confidence_with_legendNEW.png", vwidth = 1200, vheight = 1200)
 
 
