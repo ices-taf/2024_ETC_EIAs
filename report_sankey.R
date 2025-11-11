@@ -106,27 +106,27 @@ col_scale <- 'd3.scaleOrdinal()
 #   links$source == "Small vessels - active demersal",
 #   "Confidence"] <- "Low"
 
-links[
-  links$source == "Small vessels - active demersal" & links$target == "Abrasion",
-  "Confidence"] <- "Medium"
-links[
-  links$source == "Abrasion" & links$target == "Fish",
-  "Confidence"] <- "Medium"
+# links[
+#   links$source == "Small vessels - active demersal" & links$target == "Abrasion",
+#   "Confidence"] <- "Medium"
+# links[
+#   links$source == "Abrasion" & links$target == "Fish",
+#   "Confidence"] <- "Medium"
 
-links[
-  links$source == "Large vessels - pelagic trawlers" & links$target == "Living Resources Extraction",
-  "Confidence"] <- "Low"
-links[
-  links$source == "Living Resources Extraction" & links$target == "Fish",
-  "Confidence"] <- "Low"
+# links[
+#   links$source == "Large vessels - pelagic trawlers" & links$target == "Living Resources Extraction",
+#   "Confidence"] <- "Low"
+# links[
+#   links$source == "Living Resources Extraction" & links$target == "Fish",
+#   "Confidence"] <- "Low"
 
-links[
-  links$source == "Small vessels - active demersal" & links$target == "Noise",
-  "Confidence"] <- "High"
+# links[
+#   links$source == "Small vessels - active demersal" & links$target == "Noise",
+#   "Confidence"] <- "High"
 
-links[
-  links$source == "Noise" & links$target == "Marine Mammals",
-  "Confidence"] <- "Medium"
+# links[
+#   links$source == "Noise" & links$target == "Marine Mammals",
+#   "Confidence"] <- "Medium"
 
 p2 <- sankeyNetwork(
   Links = links, Nodes = nodes, Source = "IDsource", Target = "IDtarget",
