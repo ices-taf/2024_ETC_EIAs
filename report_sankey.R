@@ -75,8 +75,9 @@ pal <- paste(shQuote(pal), collapse = ", ")
 dom <- unique(links$linkgroup)
 dom <- paste(shQuote(dom), collapse = ", ")
 
+nodes$node_group <- "AllNodes"
 my_color <-
-  paste0("d3.scaleOrdinal().domain([", dom, ",'nodes']).range([", pal, ",'grey'])")
+  paste0("d3.scaleOrdinal().domain(['AllNodes',", dom, "]).range(['#6B7280',", pal, "])")
 
 
 # Make the Network. I call my colour scale with the colourScale argument
@@ -85,7 +86,7 @@ p <- sankeyNetwork(
   Value = "value", NodeID = "name",
   fontSize = 22, units = "Impact Risk",
   colourScale = my_color,
-  LinkGroup = "linkgroup", NodeGroup = "group", iterations = 0
+  LinkGroup = "linkgroup", NodeGroup = "node_group", iterations = 0
 )
 p
 

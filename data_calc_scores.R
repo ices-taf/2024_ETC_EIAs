@@ -6,11 +6,15 @@ source("utilities_pressures.R")
 
 # read in data
 
+# files <- c(
+#   "Fisheries-NEA",
+#   "Fisheries-Med",
+#   "Aquaculture-NEA",
+#   "Aquaculture-Med"
+# )
+
 files <- c(
-  "Fisheries-NEA",
-  "Fisheries-Med",
-  "Aquaculture-NEA",
-  "Aquaculture-Med"
+  "2025_aquaculture-allRegions -NEA"
 )
 
 all_data <- sapply(files, function(x) calc_scores(glue("boot/data/google_sheets/{x}.csv")), simplify = FALSE)
