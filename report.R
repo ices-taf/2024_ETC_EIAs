@@ -13,6 +13,7 @@ all_data <- readRDS("data/all_data.rds")
 
 
 sankeys <- list()
+sankey_confidence <- list()
 
 # tab <- "Fisheries-NEA"
 for (tab in names(all_data)) {
@@ -24,6 +25,7 @@ for (tab in names(all_data)) {
   setwd("../..")
 
   sankeys[[tab]] <- p
+  sankey_confidence[[tab]] <- p2
 
   # write out to csv files
   write.taf(data[, -c(7:9, 11:12)], file = glue("report/{tab}.csv"), quote = TRUE)
@@ -32,7 +34,7 @@ for (tab in names(all_data)) {
 save(sankeys, file = "report/sankeys.rds")
 
 # combine into a single html report
-rmarkdown::render("report.Rmd", output_file = "report.html", output_dir = "report")
+rmarkdown::render("report.Rmd", output_file = "report.html", output_dir = "report", output_options = list(self_contained = TRUE))
 
 # make tables
 rmarkdown::render("report_tables_stage2.Rmd", output_dir = "report")
