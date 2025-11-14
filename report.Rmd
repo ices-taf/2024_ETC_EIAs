@@ -76,3 +76,17 @@ sankeys[['2025_fisheries-SoS']]
 sankey_confidence[['2025_fisheries-SoS']]
 ```
 \clearpage
+## Fisheries - ONA
+
+```{r, out.width="100%"}
+sankeys[['2025_fisheries-ONA']]
+sankey_confidence[['2025_fisheries-ONA']]
+```
+\clearpage
+## Fisheries - GNS
+
+```{r, out.width="100%"}
+sankeys[['2025_fisheries-GNS']]
+sankey_confidence[['2025_fisheries-GNS']]
+```
+\clearpage

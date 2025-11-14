@@ -3,7 +3,7 @@ output:
   word_document:
     toc: false
     keep_md: false
-    reference_docx: boot/data/reportTemplate.docx
+    reference_docx: boot/initial/data/reportTemplate.docx
 ---
 
 ```{r libraries, include=FALSE}
@@ -25,31 +25,30 @@ panderOptions('table.alignment.default', "center")
 ```
 
 
-
-```{r NEA-fisheries}
-risk_table <- read.taf("report/Fisheries-NEA.csv")
+```{r aquaculture-allRegions-BLT}
+risk_table <- read.taf("report/2025_aquaculture-allRegions-BLT.csv")
 
 # set caption
-set.caption("Table 1: Risk assessment for fisheries in the NEA region")
+set.caption("Table 1: Risk assessment for aquaculture in the BLT region")
 
 # Output table
 #pander(style_table1(catch_table), missing = "-")
 pander(risk_table, missing = "-")
 ```
 
-```{r Med-fisheries}
-risk_table <- read.taf("report/Fisheries-Med.csv")
+```{r aquaculture-allRegions-MED}
+risk_table <- read.taf("report/2025_aquaculture-allRegions-MED.csv")
 
 # set caption
-set.caption("Table 2: Risk assessment for fisheries in the Med region")
+set.caption("Table 2: Risk assessment for aquaculture in the MED region")
 
 # Output table
 #pander(style_table1(catch_table), missing = "-")
 pander(risk_table, missing = "-")
 ```
 
-```{r NEA-aqua}
-risk_table <- read.taf("report/Aquaculture-NEA.csv")
+```{r aquaculture-allRegions-NEA}
+risk_table <- read.taf("report/2025_aquaculture-allRegions-NEA.csv")
 
 # set caption
 set.caption("Table 3: Risk assessment for aquaculture in the NEA region")
@@ -59,13 +58,104 @@ set.caption("Table 3: Risk assessment for aquaculture in the NEA region")
 pander(risk_table, missing = "-")
 ```
 
-```{r Med-aqua}
-risk_table <- read.taf("report/Aquaculture-Med.csv")
+```{r aquaculture-lowTrophic-ADR}
+risk_table <- read.taf("report/2025_aquaculture-lowTrophic-ADR.csv")
 
 # set caption
-set.caption("Table 4: Risk assessment for aquaculture in the Med region")
+set.caption("Table 4: Risk assessment for aquaculture in the ADR region")
 
 # Output table
 #pander(style_table1(catch_table), missing = "-")
 pander(risk_table, missing = "-")
 ```
+
+```{r aquaculture-lowTrophic-GNS}
+risk_table <- read.taf("report/2025_aquaculture-lowTrophic-GNS.csv")
+
+# set caption
+set.caption("Table 5: Risk assessment for aquaculture in the GNS region")
+
+# Output table
+#pander(style_table1(catch_table), missing = "-")
+pander(risk_table, missing = "-")
+```
+
+
+```{r ADR-fisheries}
+risk_table <- read.taf("report/2025_fisheries-ADR.csv")
+
+# set caption
+set.caption("Table 6: Risk assessment for fisheries in the ADR region")
+
+# Output table
+#pander(style_table1(catch_table), missing = "-")
+pander(risk_table, missing = "-")
+```
+
+```{r BLT-N-fisheries}
+risk_table <- read.taf("report/2025_fisheries-BLT-N.csv")
+
+# set caption
+set.caption("Table 7: Risk assessment for fisheries in the BLT-N region")
+
+# Output table
+#pander(style_table1(catch_table), missing = "-")
+pander(risk_table, missing = "-")
+```
+
+```{r BLT-S-fisheries}
+risk_table <- read.taf("report/2025_fisheries-BLT-S.csv")
+
+# set caption
+set.caption("Table 8: Risk assessment for fisheries in the BLT-S region")
+
+# Output table
+#pander(style_table1(catch_table), missing = "-")
+pander(risk_table, missing = "-")
+```
+
+```{r GNS-fisheries}
+risk_table <- read.taf("report/2025_fisheries-GNS.csv")
+
+# set caption
+set.caption("Table 9: Risk assessment for fisheries in the GNS region")
+
+# Output table
+#pander(style_table1(catch_table), missing = "-")
+pander(risk_table, missing = "-")
+```
+
+```{r MED-fisheries}
+risk_table <- read.taf("report/2025_fisheries-MED.csv")
+
+# set caption
+set.caption("Table 10: Risk assessment for fisheries in the MED region")
+
+# Output table
+#pander(style_table1(catch_table), missing = "-")
+pander(risk_table, missing = "-")
+```
+
+```{r ONA-fisheries}
+risk_table <- read.taf("report/2025_fisheries-ONA.csv")
+
+# set caption
+set.caption("Table 11: Risk assessment for fisheries in the ONA region")
+
+# Output table
+#pander(style_table1(catch_table), missing = "-")
+pander(risk_table, missing = "-")
+```
+
+
+```{r SoS-fisheries}
+risk_table <- read.taf("report/2025_fisheries-SoS.csv")
+
+# set caption
+set.caption("Table 12: Risk assessment for fisheries in the SoS region")
+
+# Output table
+#pander(style_table1(catch_table), missing = "-")
+pander(risk_table, missing = "-")
+```
+

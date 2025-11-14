@@ -23,7 +23,9 @@ files <- c(
   "2025_fisheries-BLT-N",
   "2025_fisheries-MED",
   "2025_fisheries-ADR",
-  "2025_fisheries-SoS"
+  "2025_fisheries-SoS",
+  "2025_fisheries-ONA",
+  "2025_fisheries-GNS"
 )
 
 all_data <- sapply(files, function(x) calc_scores(glue("boot/data/google_sheets/{x}.csv")), simplify = FALSE)

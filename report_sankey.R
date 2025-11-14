@@ -22,7 +22,7 @@ head(data)
 data$id <- as.character(row.names(data))
 
 # Filter low values for sankey
-data <- data |> filter(ImpactRisk > 0.005)
+data <- data |> filter(ImpactRisk > 0.001)
 
 links <-
   data |>
@@ -101,7 +101,7 @@ p <- sankeyNetwork(
   Target = "IDtarget",
   Value = "value", 
   NodeID = "name",
-  fontSize = 17, 
+  fontSize = 14, 
   units = "Impact Risk",
   nodeWidth = 28,
   colourScale = my_color,
@@ -138,7 +138,7 @@ p2 <- sankeyNetwork(
   units = "Impact Risk",
   LinkGroup = "Confidence",
   NodeGroup = "node_group",
-  fontSize = 17, 
+  fontSize = 14, 
   nodeWidth = 28,
   colourScale = col_scale
   # iterations = 0
@@ -222,7 +222,7 @@ saveWidget(p2, file = "sankey_confidence.html", selfcontained = TRUE)
 webshot("sankey.html", "sankey.png", vwidth = 1200, vheight = 1200)
 # webshot("sankey_confidence.html", "sankey_confidence.png", vwidth = 1200, vheight = 1200)
 ## set chrome path
-Sys.setenv(CHROMOTE_CHROME = "C:\\Users\\luca.lamoni\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe")
+# Sys.setenv(CHROMOTE_CHROME = "C:/Users/luca.lamoni/AppData/Local/Google/Chrome/Application/chrome.exe")
 webshot2::webshot(
   "sankey_confidence.html",
   file    = "sankey_confidence.png",
