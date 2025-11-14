@@ -34,7 +34,20 @@ for (tab in names(all_data)) {
 save(sankeys, file = "report/sankeys.rds")
 
 # combine into a single html report
-rmarkdown::render("report.Rmd", output_file = "report.html", output_dir = "report", output_options = list(self_contained = TRUE))
+rmarkdown::render(
+  "report.Rmd", 
+  output_file = "report.html", 
+  output_dir = "report", 
+  output_options = list(self_contained = TRUE))
+
+# WORD
+rmarkdown::render(
+  "report.Rmd",
+  output_format = "word_document",
+  output_file   = "report_sankeys.docx",
+  output_dir    = "report"
+)
 
 # make tables
-rmarkdown::render("report_tables_stage2.Rmd", output_dir = "report")
+rmarkdown::render("report_tables_stage2.Rmd", 
+output_dir = "report")

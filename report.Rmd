@@ -8,84 +8,84 @@ output: html_document
 ```
 
 ## Aquaculture - allRegions - NEA
-```{r, out.width="100%"}
+```{r, out.width=1500, out.height=1400}
 sankeys[['2025_aquaculture-allRegions-NEA']]
 sankey_confidence[['2025_aquaculture-allRegions-NEA']]
 ```
 \clearpage
 ## Aquaculture - allRegions - MED
 
-```{r, out.width="100%"}
+```{r, out.width=1500, out.height=1400}
 sankeys[['2025_aquaculture-allRegions-MED']]
 sankey_confidence[['2025_aquaculture-allRegions-MED']]
 ```
 \clearpage
 ## Aquaculture - allRegions - BLT
 
-```{r, out.width="100%"}
+```{r, out.width=1500, out.height=1400}
 sankeys[['2025_aquaculture-allRegions-BLT']]
 sankey_confidence[['2025_aquaculture-allRegions-BLT']]
 ```
 \clearpage
 ## Aquaculture - Low Trophic - GNS
 
-```{r, out.width="100%"}
+```{r, out.width=1500, out.height=1400}
 sankeys[['2025_aquaculture-lowTrophic-GNS']]
 sankey_confidence[['2025_aquaculture-lowTrophic-GNS']]
 ```
 \clearpage
 ## Aquaculture - Low Trophic - ADR
 
-```{r, out.width="100%"}
+```{r, out.width=1500, out.height=1400}
 sankeys[['2025_aquaculture-lowTrophic-ADR']]
 sankey_confidence[['2025_aquaculture-lowTrophic-ADR']]
 ```
 \clearpage
 ## Fisheries - South BLT
 
-```{r, out.width="100%"}
+```{r, out.width=1500, out.height=1400}
 sankeys[['2025_fisheries-BLT-S']]
 sankey_confidence[['2025_fisheries-BLT-S']]
 ```
 \clearpage
 ## Fisheries - North BLT
 
-```{r, out.width="100%"}
+```{r, out.width=1500, out.height=1400}
 sankeys[['2025_fisheries-BLT-N']]
 sankey_confidence[['2025_fisheries-BLT-N']]
 ```
 \clearpage
 ## Fisheries - MED
 
-```{r, out.width="100%"}
+```{r, out.width=1500, out.height=1400}
 sankeys[['2025_fisheries-MED']]
 sankey_confidence[['2025_fisheries-MED']]
 ```
 \clearpage
 ## Fisheries - ADR
 
-```{r, out.width="100%"}
+```{r, out.width=1500, out.height=1400}
 sankeys[['2025_fisheries-ADR']]
 sankey_confidence[['2025_fisheries-ADR']]
 ```
 \clearpage
 ## Fisheries - SoS
 
-```{r, out.width="100%"}
+```{r, out.width=1500, out.height=1400}
 sankeys[['2025_fisheries-SoS']]
 sankey_confidence[['2025_fisheries-SoS']]
 ```
 \clearpage
 ## Fisheries - ONA
 
-```{r, out.width="100%"}
+```{r, out.width=1500, out.height=1400}
 sankeys[['2025_fisheries-ONA']]
 sankey_confidence[['2025_fisheries-ONA']]
 ```
 \clearpage
 ## Fisheries - GNS
 
-```{r, out.width="100%"}
+```{r, out.width=1500, out.height=1400}
 sankeys[['2025_fisheries-GNS']]
 sankey_confidence[['2025_fisheries-GNS']]
 ```
