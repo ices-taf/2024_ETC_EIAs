@@ -101,7 +101,7 @@ p <- sankeyNetwork(
   Target = "IDtarget",
   Value = "value", 
   NodeID = "name",
-  fontSize = 24, 
+  fontSize = 26, 
   units = "Impact Risk",
   nodeWidth = 28,
   colourScale = my_color,
@@ -138,7 +138,7 @@ p2 <- sankeyNetwork(
   units = "Impact Risk",
   LinkGroup = "Confidence",
   NodeGroup = "node_group",
-  fontSize = 24, 
+  fontSize = 26, 
   nodeWidth = 28,
   colourScale = col_scale
   # iterations = 0
