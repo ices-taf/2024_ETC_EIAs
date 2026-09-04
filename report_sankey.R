@@ -7,6 +7,7 @@ library(RColorBrewer)
 library(htmlwidgets)
 library(webshot)
 library(webshot2)
+library(stringr)
 
 conf_agg <- function(x) {
   c("Low", "Medium", "High")[round(ceiling(x))]
@@ -45,6 +46,13 @@ links <-
 
 summary(links$value)
 
+# 1. Clean labels in links
+links <- links %>%
+  mutate(
+    source = str_squish(source),  # trims leading/trailing + compresses internal spaces
+    target = str_squish(target)
+  )
+
 # From these flows we need to create a node data frame: it lists every entities involved in the flow
 nodes <- links |>
   group_by(source) |>
@@ -68,9 +76,9 @@ links$IDsource <- match(links$source, nodes$name) - 1
 links$IDtarget <- match(links$target, nodes$name) - 1
 nodes <- data.frame(nodes)
 nodes$name <- as.character(nodes$name)
+
 links <- data.frame(links)
 links <- links |> arrange(value, IDsource, IDtarget)
-
 
 
 # prepare color scale: I give one specific color for each node.
@@ -107,11 +115,9 @@ p <- sankeyNetwork(
   colourScale = my_color,
   LinkGroup = "linkgroup", 
   NodeGroup = "node_group"
-  # iterations = 0
+  # iterations = 10
 )
 p
-
-
 
 
 
@@ -222,7 +228,7 @@ saveWidget(p2, file = "sankey_confidence.html", selfcontained = TRUE)
 webshot("sankey.html", "sankey.png", vwidth = 1200, vheight = 1200)
 # webshot("sankey_confidence.html", "sankey_confidence.png", vwidth = 1200, vheight = 1200)
 ## set chrome path
-# Sys.setenv(CHROMOTE_CHROME = "C:/Users/luca.lamoni/AppData/Local/Google/Chrome/Application/chrome.exe")
+#  Sys.setenv(CHROMOTE_CHROME = "C:/Users/luca.lamoni/AppData/Local/Google/Chrome/Application/chrome.exe")
 webshot2::webshot(
   "sankey_confidence.html",
   file    = "sankey_confidence.png",
